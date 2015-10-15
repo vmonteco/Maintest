@@ -6,7 +6,7 @@
 /*   By: student@42 <@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/11/22 14:43:06 by student@42        #+#    #+#             */
-/*   Updated: 2015/10/15 15:09:23 by vmonteco         ###   ########.fr       */
+/*   Updated: 2014/11/16 21:39:09 by qperez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,9 @@
 #include <unistd.h>
 #include <signal.h>
 
+#include <sys/wait.h>
+#include <bsd/string.h>
+
 #include <libft.h> /* compile with -I./ */
 
 #define D_ERROR	{ printf("Error Line %d, Funct %s ", __LINE__ - 1, __func__); return (0); }
@@ -52,6 +55,8 @@
 #define D_TEST	60
 #define RANDT	512
 #define LONG	10000
+
+#define SIGEMT 7
 
 int	uf_test_strtrim(void);
 int	uf_test_strsplit(void);
@@ -292,8 +297,9 @@ t_list		*uf_testmap(t_list *elem)
 {
 	t_list	*new;
 	char	*content;
+	// int		i;
 	size_t	i;
-
+	
 	content = ft_strdup((char *)(elem->content));
 	i = 0;
 	while (i < ft_strlen(content))
@@ -1631,8 +1637,8 @@ int				uf_test_memchr(void)
 	int				i;
 
 	i = -300;
-	memchr(NULL, 0, 0);
-	ft_memchr(NULL, 0, 0);
+	//memchr(NULL, 0, 0);
+	//ft_memchr(NULL, 0, 0);
 	while (i < 300)
 	{
 		j = 0;
